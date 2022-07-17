@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.db"
+}
+
+model ProfessionalUser {
+  id               String            @id @default(uuid())
+  email            String            @unique
+  password         String
+  ProfessionalInfo ProfessionalInfo?
+
+  @@map("professional_user")
+}
+
+model ProfessionalInfo {
+  id                   String           @id @default(uuid())
+  email                String           @unique
+  password             String
+  name                 String?
+  birthdate            DateTime?
+  cpf                  String?          @unique
+  phone                String?          @unique
+  professionalTitle    String?          @map("professional_title")
+  professionalDocument String?          @unique @map("professional_document")
+  createdAt            DateTime         @default(now()) @map("created_at")
+  updatedAt            DateTime?        @updatedAt @map("updated_at")
+  clients              Client[]
+  professionalUserId   String           @unique @map("professional_user_id")
+  ProfessionalUser     ProfessionalUser @relation(fields: [professionalUserId], references: [id])
+
+  @@map("professional_info")
+}
+
+model Client {
+  id                 String            @id @default(uuid())
+  active             Boolean?          @default(true)
+  sponsor            Boolean?          @default(false)
+  name               String
+  birthdate          DateTime?
+  cpf                String            @unique
+  email              String?           @unique
+  phone              String            @unique
+  consultationPrice  Int               @map("consultation_price")
+  createdAt          DateTime          @default(now()) @map("created_at")
+  updatedAt          DateTime?         @updatedAt @map("updated_at")
+  professionalInfoId String?           @map("professional_info_id")
+  professionalInfo   ProfessionalInfo? @relation(fields: [professionalInfoId], references: [id])
+
+  @@map("client")
+}
