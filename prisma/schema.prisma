@@ -11,6 +11,7 @@ model ProfessionalUser {
   id               String            @id @default(uuid())
   email            String            @unique
   password         String
+  clients          Client[]
   ProfessionalInfo ProfessionalInfo?
 
   @@map("professional_user")
@@ -28,7 +29,6 @@ model ProfessionalInfo {
   professionalDocument String?          @unique @map("professional_document")
   createdAt            DateTime         @default(now()) @map("created_at")
   updatedAt            DateTime?        @updatedAt @map("updated_at")
-  clients              Client[]
   professionalUserId   String           @unique @map("professional_user_id")
   ProfessionalUser     ProfessionalUser @relation(fields: [professionalUserId], references: [id])
 
@@ -47,8 +47,8 @@ model Client {
   consultationPrice  Int               @map("consultation_price")
   createdAt          DateTime          @default(now()) @map("created_at")
   updatedAt          DateTime?         @updatedAt @map("updated_at")
-  professionalInfoId String?           @map("professional_info_id")
-  professionalInfo   ProfessionalInfo? @relation(fields: [professionalInfoId], references: [id])
+  professionalUserId String?
+  ProfessionalUser   ProfessionalUser? @relation(fields: [professionalUserId], references: [id])
 
   @@map("client")
 }
