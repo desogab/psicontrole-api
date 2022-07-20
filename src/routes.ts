@@ -1,9 +1,9 @@
 import { Router } from "express";
 
 import { isAuthenticated } from "./middlewares/isAuthenticated";
-import { AuthProfessionalUserController } from "./modules/account/useCases/authProfessionalUser/AuthProfessionalUserController";
-import { CreateClientController } from "./modules/client/useCases/createClient/CreateClientController";
-import { CreateProfessionalUseController } from "./modules/professional/useCases/createProfessionalUser/CreateProfessionalUserController";
+import { AuthProfessionalUserController } from "./models/account/useCases/authProfessionalUser/AuthProfessionalUserController";
+import { CreateClientController } from "./models/client/useCases/createClient/CreateClientController";
+import { CreateProfessionalUseController } from "./models/professional/useCases/createProfessionalUser/CreateProfessionalUserController";
 
 const routes = Router();
 
