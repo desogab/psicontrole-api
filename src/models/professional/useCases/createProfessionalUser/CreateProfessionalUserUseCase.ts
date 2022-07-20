@@ -30,6 +30,9 @@ export class CreateProfessionalUserUseCase {
       data: {
         email,
         password: hasPassword,
+        ProfessionalInfo: {
+          create: {},
+        },
       },
     });
 

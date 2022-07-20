@@ -8,11 +8,11 @@ export class CreateProfessionalUseController {
 
     const createProfessionalUseCase = new CreateProfessionalUserUseCase();
 
-    const result = await createProfessionalUseCase.execute({
+    const professional = await createProfessionalUseCase.execute({
       email,
       password,
     });
 
-    return response.json(result);
+    return response.status(201).json(professional);
   }
 }
