@@ -4,19 +4,32 @@ import { CreateClientUseCase } from "./CreateClientUseCase";
 
 export class CreateClientController {
   async handle(request: Request, response: Response) {
-    const { name, cpf, phone, consultationPrice } = request.body;
+    const {
+      active,
+      sponsor,
+      name,
+      birthdate,
+      cpf,
+      phone,
+      email,
+      consultationPrice,
+    } = request.body;
     const { professionalUserId } = request;
 
     const createClientUseCase = new CreateClientUseCase();
 
     const client = await createClientUseCase.execute({
+      active,
+      sponsor,
       name,
+      birthdate,
       cpf,
       phone,
+      email,
       consultationPrice,
       professionalUserId,
     });
 
-    return response.json(client);
+    return response.status(201).json(client);
   }
 }

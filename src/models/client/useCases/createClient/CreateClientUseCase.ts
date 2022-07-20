@@ -2,8 +2,12 @@ import { prisma } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
 
 interface ICreateClient {
+  active?: boolean;
+  sponsor?: boolean;
   name: string;
+  birthdate?: string;
   cpf: string;
+  email?: string;
   phone: string;
   consultationPrice: number;
   professionalUserId: string;
@@ -11,9 +15,13 @@ interface ICreateClient {
 
 export class CreateClientUseCase {
   async execute({
+    active,
+    sponsor,
     name,
+    birthdate,
     cpf,
     phone,
+    email,
     consultationPrice,
     professionalUserId,
   }: ICreateClient) {
@@ -29,9 +37,13 @@ export class CreateClientUseCase {
 
     const client = await prisma.client.create({
       data: {
+        active,
+        sponsor,
         name,
+        birthdate,
         cpf,
         phone,
+        email,
         consultationPrice,
         professionalUserId,
       },
