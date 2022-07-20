@@ -1,4 +1,5 @@
 import { prisma } from "../../../../database/prismaClient";
+import { AppError } from "../../../../errors/AppError";
 
 interface ICreateClient {
   name: string;
@@ -24,7 +25,7 @@ export class CreateClientUseCase {
       },
     });
 
-    if (clientAlreadyExists) throw new Error("O cliente já existe!");
+    if (clientAlreadyExists) throw new AppError("O cliente já existe!", 400);
 
     const client = await prisma.client.create({
       data: {

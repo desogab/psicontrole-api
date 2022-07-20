@@ -1,6 +1,7 @@
 import { hash } from "bcrypt";
 
 import { prisma } from "../../../../database/prismaClient";
+import { AppError } from "../../../../errors/AppError";
 
 interface ICreateProfessionalUser {
   email: string;
@@ -18,8 +19,9 @@ export class CreateProfessionalUserUseCase {
     });
 
     if (professionalAlreadyExists)
-      throw new Error(
-        "O email já se encontra em nosso banco de dados, tente novamente."
+      throw new AppError(
+        "O email já se encontra em nosso banco de dados, tente novamente.",
+        400
       );
 
     const hasPassword = await hash(password, 10);

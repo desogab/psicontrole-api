@@ -2,6 +2,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
 import { prisma } from "../../../../database/prismaClient";
+import { AppError } from "../../../../errors/AppError";
 
 interface IAuthProfessionalUser {
   email: string;
@@ -16,11 +17,13 @@ export class AuthProfessionalUserUseCase {
       },
     });
 
-    if (!professionalUser) throw new Error("Email or password is invalid!");
+    if (!professionalUser)
+      throw new AppError("Email or password is invalid!", 400);
 
     const passwordMatch = await compare(password, professionalUser.password);
 
-    if (!passwordMatch) throw new Error("Email or password is invalid!");
+    if (!passwordMatch)
+      throw new AppError("Email or password is invalid!", 400);
 
     const token = sign({ email }, process.env.SECRET_JWT_TOKEN as string, {
       subject: professionalUser.id,
