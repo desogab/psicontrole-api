@@ -25,13 +25,16 @@ export class AuthProfessionalUserUseCase {
     if (!passwordMatch)
       throw new AppError("Email or password is invalid!", 400);
 
-    const token = sign({ email }, process.env.SECRET_JWT_TOKEN as string, {
+    const token = sign({}, process.env.SECRET_JWT_TOKEN as string, {
       subject: professionalUser.id,
       expiresIn: "8h",
     });
 
     return {
       access_token: token,
+      user: {
+        email: professionalUser.email,
+      },
     };
   }
 }
