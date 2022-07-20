@@ -19,8 +19,6 @@ model ProfessionalUser {
 
 model ProfessionalInfo {
   id                   String           @id @default(uuid())
-  email                String           @unique
-  password             String
   name                 String?
   birthdate            DateTime?
   cpf                  String?          @unique
@@ -30,7 +28,7 @@ model ProfessionalInfo {
   createdAt            DateTime         @default(now()) @map("created_at")
   updatedAt            DateTime?        @updatedAt @map("updated_at")
   professionalUserId   String           @unique @map("professional_user_id")
-  ProfessionalUser     ProfessionalUser @relation(fields: [professionalUserId], references: [id])
+  ProfessionalUser     ProfessionalUser @relation(fields: [professionalUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("professional_info")
 }
