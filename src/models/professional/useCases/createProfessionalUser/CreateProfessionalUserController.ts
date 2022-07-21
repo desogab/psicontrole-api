@@ -4,15 +4,19 @@ import { CreateProfessionalUserUseCase } from "./CreateProfessionalUserUseCase";
 
 export class CreateProfessionalUseController {
   async handle(request: Request, response: Response) {
-    const { email, password } = request.body;
+    const { email, password, name } = request.body;
 
     const createProfessionalUseCase = new CreateProfessionalUserUseCase();
 
     const professional = await createProfessionalUseCase.execute({
       email,
       password,
+      name,
     });
 
-    return response.status(201).json(professional);
+    return response.status(201).json({
+      id: professional.id,
+      email: professional.email,
+    });
   }
 }

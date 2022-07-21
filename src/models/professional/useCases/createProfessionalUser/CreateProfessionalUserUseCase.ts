@@ -6,10 +6,11 @@ import { AppError } from "../../../../errors/AppError";
 interface ICreateProfessionalUser {
   email: string;
   password: string;
+  name: string;
 }
 
 export class CreateProfessionalUserUseCase {
-  async execute({ email, password }: ICreateProfessionalUser) {
+  async execute({ email, password, name }: ICreateProfessionalUser) {
     const professionalAlreadyExists = await prisma.professionalUser.findFirst({
       where: {
         email: {
@@ -24,14 +25,16 @@ export class CreateProfessionalUserUseCase {
         400
       );
 
-    const hasPassword = await hash(password, 10);
+    const hashPassword = await hash(password, 10);
 
     const client = await prisma.professionalUser.create({
       data: {
         email,
-        password: hasPassword,
+        password: hashPassword,
         ProfessionalInfo: {
-          create: {},
+          create: {
+            name,
+          },
         },
       },
     });
