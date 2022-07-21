@@ -2,7 +2,7 @@ import { prisma } from "../../../../database/prismaClient";
 
 interface IProfessionalInfo {
   name?: string;
-  birthdate?: string;
+  birthdate?: Date;
   cpf?: string;
   phone?: string;
   professionalTitle?: string;
@@ -26,7 +26,7 @@ export class UpdateProfessionalInfoUseCase {
       },
       data: {
         name,
-        birthdate,
+        birthdate: new Date(birthdate),
         cpf,
         phone,
         professionalTitle,

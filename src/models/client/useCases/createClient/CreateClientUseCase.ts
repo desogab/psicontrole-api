@@ -1,11 +1,11 @@
 import { prisma } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
 
-interface ICreateClient {
+interface IClient {
   active?: boolean;
   sponsor?: boolean;
   name: string;
-  birthdate?: string;
+  birthdate?: Date;
   cpf: string;
   email?: string;
   phone: string;
@@ -24,7 +24,7 @@ export class CreateClientUseCase {
     email,
     consultationPrice,
     professionalUserId,
-  }: ICreateClient) {
+  }: IClient) {
     const clientAlreadyExists = await prisma.client.findFirst({
       where: {
         cpf: {
@@ -40,7 +40,7 @@ export class CreateClientUseCase {
         active,
         sponsor,
         name,
-        birthdate,
+        birthdate: new Date(birthdate),
         cpf,
         phone,
         email,
