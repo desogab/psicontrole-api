@@ -19,7 +19,7 @@ model ProfessionalUser {
 
 model ProfessionalInfo {
   id                   String           @id @default(uuid())
-  name                 String?
+  name                 String
   birthdate            DateTime?
   cpf                  String?          @unique
   phone                String?          @unique
@@ -27,26 +27,26 @@ model ProfessionalInfo {
   professionalDocument String?          @unique @map("professional_document")
   createdAt            DateTime         @default(now()) @map("created_at")
   updatedAt            DateTime?        @updatedAt @map("updated_at")
-  professionalUserId   String           @unique @map("professional_user_id")
+  professionalUserId   String           @unique @map("professional_user_id_professional_info_id")
   ProfessionalUser     ProfessionalUser @relation(fields: [professionalUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("professional_info")
 }
 
 model Client {
-  id                 String            @id @default(uuid())
-  active             Boolean?          @default(true)
-  sponsor            Boolean?          @default(false)
+  id                 String           @id @default(uuid())
+  active             Boolean?         @default(true)
+  sponsor            Boolean?         @default(false)
   name               String
   birthdate          DateTime?
-  cpf                String            @unique
-  email              String?           @unique
-  phone              String            @unique
-  consultationPrice  Int               @map("consultation_price")
-  createdAt          DateTime          @default(now()) @map("created_at")
-  updatedAt          DateTime?         @updatedAt @map("updated_at")
-  professionalUserId String?
-  ProfessionalUser   ProfessionalUser? @relation(fields: [professionalUserId], references: [id])
+  cpf                String           @unique
+  email              String?          @unique
+  phone              String           @unique
+  consultationPrice  Int              @map("consultation_price")
+  createdAt          DateTime         @default(now()) @map("created_at")
+  updatedAt          DateTime?        @updatedAt @map("updated_at")
+  professionalUserId String           @unique @map("professional_user_id_client_id")
+  ProfessionalUser   ProfessionalUser @relation(fields: [professionalUserId], references: [id])
 
   @@map("client")
 }
