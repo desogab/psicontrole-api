@@ -4,24 +4,24 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Client extends Person {
-    private final UUID patientId;
+    private final UUID clientId;
     private final boolean active = true;
 
-    private Client(UUID patientId, String name, String cpf) {
+    private Client(UUID clientId, String name, String cpf) {
         super(name, cpf);
-        this.patientId = patientId;
+        this.clientId = clientId;
     }
 
-    public static Client create(String patientId, String name, String cpf) {
-        return new Client(UUID.fromString(patientId), name, cpf);
+    public static Client create(String name, String cpf) {
+        return new Client(UUID.randomUUID(), name, cpf);
     }
 
-    public UUID getPatientId() {
-        return patientId;
+    public UUID getClientId() {
+        return this.clientId;
     }
 
     public boolean isActive() {
-        return active;
+        return this.active;
     }
 
     @Override
@@ -29,18 +29,18 @@ public class Client extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Client client = (Client) o;
-        return active == client.active && Objects.equals(patientId, client.patientId);
+        return this.active == client.active && Objects.equals(this.clientId, client.clientId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), patientId, active);
+        return Objects.hash(super.hashCode(), this.clientId, this.active);
     }
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "patientId=" + patientId +
+        return "Client{" +
+                "clientId=" + clientId +
                 ", active=" + active +
                 '}';
     }
