@@ -17,18 +17,18 @@ public class Guardian extends Person {
     }
 
     public UUID getGuardianId() {
-        return guardianId;
+        return this.guardianId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Guardian guardian = (Guardian) o;
-        return Objects.equals(guardianId, guardian.guardianId);
+        return Objects.equals(this.guardianId, guardian.guardianId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guardianId);
+        return Objects.hash(this.guardianId);
     }
 }

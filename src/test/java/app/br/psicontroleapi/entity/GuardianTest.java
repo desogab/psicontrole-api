@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GuardianTest {
 
     /**
-     * Test case for successful creation of Guardian with valid parameters.
+     * Test case for the successful creation of Guardian with valid parameters.
      */
     @Test
     void testCreateGuardianSuccessfully() {
