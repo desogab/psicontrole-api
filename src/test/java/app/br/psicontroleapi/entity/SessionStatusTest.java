@@ -1,5 +1,6 @@
 package app.br.psicontroleapi.entity;
 
+import app.br.psicontroleapi.entity.SessionStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
