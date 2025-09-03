@@ -3,20 +3,20 @@ package app.br.psicontroleapi.entity;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Psychologist extends Person{
+public class Psychologist extends Person {
     private final UUID psychologistId;
 
-    public Psychologist(UUID psychologistId, String name, String cpf) {
+    private Psychologist(UUID psychologistId, String name, String cpf) {
         super(name, cpf);
         this.psychologistId = psychologistId;
     }
 
-    public static Psychologist create(String psychologistId, String name, String cpf) {
-        return new Psychologist(UUID.fromString(psychologistId), name, cpf);
+    public static Psychologist create(String name, String cpf) {
+        return new Psychologist(UUID.randomUUID(), name, cpf);
     }
 
     public UUID getPsychologistId() {
-        return psychologistId;
+        return this.psychologistId;
     }
 
     @Override
@@ -24,18 +24,18 @@ public class Psychologist extends Person{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Psychologist that = (Psychologist) o;
-        return Objects.equals(psychologistId, that.psychologistId);
+        return Objects.equals(this.psychologistId, that.psychologistId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), psychologistId);
+        return Objects.hash(super.hashCode(), this.psychologistId);
     }
 
     @Override
     public String toString() {
         return "Psychologist{" +
-                "psychologistId=" + psychologistId +
+                "psychologistId=" + this.psychologistId +
                 '}';
     }
 }
