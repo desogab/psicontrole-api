@@ -83,25 +83,14 @@ class CpfTest {
 
     @Test
     void shouldReturnFalseForNullCpf() {
-        // Arrange
-        String nullCpf = null;
-
-        // Act
-        boolean isValid = Cpf.isValid(nullCpf);
-
-        // Assert
+        boolean isValid = Cpf.isValid(null);
         assertFalse(isValid, "Expected CPF to be invalid because it is null");
     }
 
     @Test
     void shouldReturnFalseForEmptyCpf() {
-        // Arrange
         String emptyCpf = "";
-
-        // Act
         boolean isValid = Cpf.isValid(emptyCpf);
-
-        // Assert
         assertFalse(isValid, "Expected CPF to be invalid because it is empty");
     }
 
