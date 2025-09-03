@@ -2,8 +2,7 @@ package app.br.psicontroleapi.entity;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
 
@@ -16,14 +15,14 @@ class PersonTest {
     void testEquals_SameObject() {
         Person person = new Person("John Doe", "123.456.789-09");
 
-        assertTrue(person.equals(person), "An object should be equal to itself.");
+        assertEquals(person, person, "An object should be equal to itself.");
     }
 
     @Test
     void testEquals_NullObject() {
         Person person = new Person("John Doe", "123.456.789-09");
 
-        assertFalse(person.equals(null), "An object should not be equal to null.");
+        assertNotEquals(null, person, "An object should not be equal to null.");
     }
 
     @Test
@@ -31,7 +30,7 @@ class PersonTest {
         Person person = new Person("John Doe", "123.456.789-09");
         String dummy = "Not a Person";
 
-        assertFalse(person.equals(dummy), "An object should not be equal to an object of a different class.");
+        assertNotEquals(person, dummy, "An object should not be equal to an object of a different class.");
     }
 
     @Test
@@ -39,7 +38,7 @@ class PersonTest {
         Person person1 = new Person("John Doe", "123.456.789-09");
         Person person2 = new Person("John Doe", "123.456.789-09");
 
-        assertTrue(person1.equals(person2), "Two person objects with the same name and CPF should be equal.");
+        assertEquals(person1, person2, "Two person objects with the same name and CPF should be equal.");
     }
 
     @Test
@@ -47,7 +46,7 @@ class PersonTest {
         Person person1 = new Person("John Doe", "123.456.789-09");
         Person person2 = new Person("Jane Doe", "123.456.789-09");
 
-        assertFalse(person1.equals(person2), "Two person objects with different names should not be equal.");
+        assertNotEquals(person1, person2, "Two person objects with different names should not be equal.");
     }
 
     @Test
@@ -55,7 +54,7 @@ class PersonTest {
         Person person1 = new Person("John Doe", "123.456.789-09");
         Person person2 = new Person("John Doe", "987.654.321-00");
 
-        assertFalse(person1.equals(person2), "Two person objects with different CPFs should not be equal.");
+        assertNotEquals(person1, person2, "Two person objects with different CPFs should not be equal.");
     }
 
     @Test
@@ -63,6 +62,6 @@ class PersonTest {
         Person person1 = new Person("John Doe", "123.456.789-09");
         Person person2 = new Person("Jane Doe", "987.654.321-00");
 
-        assertFalse(person1.equals(person2), "Two person objects with different names and CPFs should not be equal.");
+        assertNotEquals(person1, person2, "Two person objects with different names and CPFs should not be equal.");
     }
 }
